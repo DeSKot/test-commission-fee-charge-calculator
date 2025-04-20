@@ -5,6 +5,6 @@ namespace CommissionFeeCalculator\Exceptions;
 
 use Exception;
 
-class InvalidArgumentException extends Exception
+class CsvFileReaderException extends Exception
 {
 }

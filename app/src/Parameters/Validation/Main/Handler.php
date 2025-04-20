@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace CommissionFeeCalculator\Parameters\Validation\Main;
 
 use CommissionFeeCalculator\Exceptions\InvalidArgumentException;
