@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace CommissionFeeCalculator\FileReader\Csv;
+namespace CommissionFeeCalculator\Service\FileReader\Csv;
 
-use CommissionFeeCalculator\Exceptions\CsvFileReaderException;
-use CommissionFeeCalculator\FileReader\Reader;
+use CommissionFeeCalculator\Exceptions\Reader\CsvFileReaderException;
+use CommissionFeeCalculator\Service\FileReader\Reader;
 use Generator;
 
 abstract class Csv extends Reader

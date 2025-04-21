@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace CommissionFeeCalculator\Parameters\Validation\Main;
+namespace CommissionFeeCalculator\Service\Parameters\Validation\Main;
 
-use CommissionFeeCalculator\Exceptions\InvalidArgumentException;
-use CommissionFeeCalculator\Parameters\DTO\CliParameters as MainDTO;
-use CommissionFeeCalculator\Parameters\Validation\Validation;
+use CommissionFeeCalculator\Exceptions\Parameters\InvalidArgumentException;
+use CommissionFeeCalculator\Service\Parameters\DTO\CliParameters as MainDTO;
+use CommissionFeeCalculator\Service\Parameters\Validation\Validation;
 use RuntimeException;
 
 class Handler implements Validation

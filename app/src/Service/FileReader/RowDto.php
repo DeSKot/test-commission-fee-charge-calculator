@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace CommissionFeeCalculator\FileReader;
+namespace CommissionFeeCalculator\Service\FileReader;
 
 abstract class RowDto
 {

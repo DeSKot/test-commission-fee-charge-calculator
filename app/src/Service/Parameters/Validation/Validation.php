@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace CommissionFeeCalculator\Parameters\Validation;
+namespace CommissionFeeCalculator\Service\Parameters\Validation;
 
-use CommissionFeeCalculator\Parameters\DTO\CliParameters as MainDTO;
+use CommissionFeeCalculator\Service\Parameters\DTO\CliParameters as MainDTO;
 
 interface Validation
 {

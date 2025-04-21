@@ -1,18 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace CommissionFeeCalculator\FileReader\Transaction;
+namespace CommissionFeeCalculator\Service\FileReader\Transaction;
 
-use CommissionFeeCalculator\Exceptions\CsvTransactionFileReaderException;
-use CommissionFeeCalculator\FileReader\Csv\Csv;
-use CommissionFeeCalculator\FileReader\RowDto;
+use CommissionFeeCalculator\Service\Transaction\Context\UserContextMap;
+use CommissionFeeCalculator\Exceptions\Reader\CsvTransactionFileReaderException;
+use CommissionFeeCalculator\Service\FileReader\Csv\Csv;
+use CommissionFeeCalculator\Service\FileReader\RowDto;
+use CommissionFeeCalculator\Service\Transaction\Client\Provider\Contract as ClientProviderContract;
 use Generator;
 
 class Reader extends Csv
 {
 
     public function __construct(
-
+        protected ClientProviderContract $clientProvider,
+        protected UserContextMap $userContextMap,
     )
     {
     }
@@ -34,8 +37,9 @@ class Reader extends Csv
             if (!$row instanceof TransactionRowDto) {
                 throw new CsvTransactionFileReaderException("Invalid row data type.");
             }
-
-
+            $client = $this->clientProvider->select($row->getUserType());
+            $operation = $row->getOperationType();
+            $client->$operation($row, $this->userContextMap);
         }
     }
 }

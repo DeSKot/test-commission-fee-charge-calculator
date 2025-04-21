@@ -1,28 +1,28 @@
 <?php
 declare(strict_types=1);
 
-namespace CommissionFeeCalculator\FileReader\Transaction;
+namespace CommissionFeeCalculator\Service\FileReader\Transaction;
 
-use CommissionFeeCalculator\FileReader\RowDto;
+use CommissionFeeCalculator\Service\FileReader\RowDto;
 use DateTime;
 
 class TransactionRowDto extends RowDto
 {
     private readonly int $userId;
     private readonly string $userType;
-    private readonly string $type;
+    private readonly string $operationType;
     private readonly string $amount;
     private readonly string $currency;
-    private readonly \DateTime $date;
+    private readonly DateTime $date;
 
     protected function setRowData(): void
     {
-        $this->userId = (int)$this->rowData[0];
-        $this->userType = $this->rowData[1];
-        $this->type = $this->rowData[2];
-        $this->amount = $this->rowData[3];
-        $this->currency = $this->rowData[4];
         $this->date = DateTime::createFromFormat('Y-m-d', $this->rowData[0]);
+        $this->userId = (int)$this->rowData[1];
+        $this->userType = $this->rowData[2];
+        $this->operationType = $this->rowData[3];
+        $this->amount = $this->rowData[4];
+        $this->currency = $this->rowData[5];
     }
 
     public function getUserId(): int
@@ -35,9 +35,9 @@ class TransactionRowDto extends RowDto
         return $this->userType;
     }
 
-    public function getType(): string
+    public function getOperationType(): string
     {
-        return $this->type;
+        return $this->operationType;
     }
 
     public function getAmount(): string
@@ -50,7 +50,7 @@ class TransactionRowDto extends RowDto
         return $this->currency;
     }
 
-    public function getDate(): \DateTime
+    public function getDate(): DateTime
     {
         return $this->date;
     }

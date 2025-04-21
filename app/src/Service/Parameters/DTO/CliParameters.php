@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace CommissionFeeCalculator\Parameters\DTO;
+namespace CommissionFeeCalculator\Service\Parameters\DTO;
 
 class CliParameters
 {
@@ -10,7 +10,7 @@ class CliParameters
     public function __construct(int $argc, array $argv)
     {
         $this->setArgc($argc);
-        $this->setFilePath($argv[1]);
+        $this->setFilePath($argv[1] ?? null);
     }
 
     protected function setArgc(int $argc): void

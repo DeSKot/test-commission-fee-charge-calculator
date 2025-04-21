@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace CommissionFeeCalculator;
 
-use CommissionFeeCalculator\Parameters\DTO\CliParameters;
-use CommissionFeeCalculator\Parameters\Validation\Validation;
 use CommissionFeeCalculator\Exceptions\Kernel as KernelException;
-use CommissionFeeCalculator\FileReader\Reader as FileReader;
+use CommissionFeeCalculator\Service\FileReader\Reader as FileReader;
+use CommissionFeeCalculator\Service\Parameters\DTO\CliParameters;
+use CommissionFeeCalculator\Service\Parameters\Validation\Validation;
+
 readonly class App
 {
     public function __construct(
@@ -29,10 +30,12 @@ readonly class App
     {
         $parameters = new CliParameters($argc, $argv);
         $this->validation->validate($parameters);
+
+        //instead file reader create provider for him
+        //provider has to return file reader by type of file nad interface
+        //CommissionFeeCalculator\Service\FileReader\Reader
         $this->fileReader->display(
             $this->fileReader->read($parameters->getFilePath())
-    );
-
-        var_dump($parameters);
+        );
     }
 }
