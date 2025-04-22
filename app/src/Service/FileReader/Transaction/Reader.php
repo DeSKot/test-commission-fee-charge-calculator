@@ -8,10 +8,12 @@ use CommissionFeeCalculator\Exceptions\Reader\CsvTransactionFileReaderException;
 use CommissionFeeCalculator\Service\FileReader\Csv\Csv;
 use CommissionFeeCalculator\Service\FileReader\RowDto;
 use CommissionFeeCalculator\Service\Transaction\Client\Provider\Contract as ClientProviderContract;
+use CommissionFeeCalculator\Traits\UserContext as UserContextTrait;
 use Generator;
 
 class Reader extends Csv
 {
+    use UserContextTrait;
 
     public function __construct(
         protected ClientProviderContract $clientProvider,

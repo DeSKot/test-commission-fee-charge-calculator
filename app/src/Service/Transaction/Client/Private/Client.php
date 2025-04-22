@@ -5,29 +5,34 @@ namespace CommissionFeeCalculator\Service\Transaction\Client\Private;
 
 use CommissionFeeCalculator\Enum\Calculation;
 use CommissionFeeCalculator\Service\FileReader\RowDto;
+use CommissionFeeCalculator\Service\FileReader\Transaction\TransactionRowDto;
 use CommissionFeeCalculator\Service\Transaction\Client\Client as AbstractClient;
 use CommissionFeeCalculator\Service\Transaction\Client\Rules\FreeCharge\CommissionHandler;
 use CommissionFeeCalculator\Service\Transaction\Context\UserContextMap;
+use CommissionFeeCalculator\Traits\UserContext;
 
 class Client extends AbstractClient
 {
+    use UserContext;
 
     public function __construct(
         protected CommissionHandler $commissionHandler
     )
     {}
 
+    /**
+     * @param TransactionRowDto $row
+     * @param UserContextMap $context
+     * @return void
+     */
     public function withdraw(RowDto $row, UserContextMap $context): void
     {
-        $userContext = $this->getUserContext($row, $context);
-        $userContext->getOperation()->getWithdraw()->updateCounter();
-        $userContext->getOperation()->getWithdraw()->updateAmount($row->getAmount());
+        $this->getUserContext($row, $context)
+            ->getOperation()
+            ->getWithdraw()
+            ->setGroupOperationPerWeek($row->getDate());
 
-        $commissionFee = bcmul(
-            $row->getAmount(),
-            $this->commissionHandler->handle($row, $context),
-            Calculation::DEFAULT_SCALE->value
-        );
+        $commissionFee = $this->commissionHandler->handle($row, $context);
 
         $commissionFee = $this->roundUp(
             $commissionFee,

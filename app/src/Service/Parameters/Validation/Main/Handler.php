@@ -13,22 +13,17 @@ class Handler implements Validation
 
     /**
      * @throws InvalidArgumentException
+     * @throws RuntimeException
      */
     public function validate(MainDTO $mainDto): bool
     {
-        if ($mainDto->getArgc() < 2) {
-            throw new InvalidArgumentException("Usage: php script.php <file_path>");
-        }
-
         $filePath = $mainDto->getFilePath();
-        if (!file_exists($filePath)) {
-            throw new RuntimeException("File '$filePath' does not exist");
-        }
 
-        if (!is_readable($filePath)) {
-            throw new RuntimeException("File '$filePath' is not readable.");
-        }
-
-        return true;
+        return match (true) {
+            $mainDto->getArgc() < 2 => throw new InvalidArgumentException("Usage: php script.php <file_path>"),
+            !file_exists($filePath) => throw new RuntimeException("File '$filePath' does not exist"),
+            !is_readable($filePath) => throw new RuntimeException("File '$filePath' is not readable"),
+            default => true
+        };
     }
 }

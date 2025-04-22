@@ -1,10 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace CommissionFeeCalculator\Service\Transaction\Context;
 
 use CommissionFeeCalculator\Service\Transaction\Context\Operation\Operation;
-use Doctrine\Common\Collections\ArrayCollection;
-use DateTime;
 
 class User
 {

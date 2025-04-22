@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace CommissionFeeCalculator\Traits;
 
@@ -27,6 +28,6 @@ trait DefaultOperationSetterGetter
 
     public function updateCounter(int $up = 1): void
     {
-        $this->counter =+ $up;
+        $this->counter += $up;
     }
 }

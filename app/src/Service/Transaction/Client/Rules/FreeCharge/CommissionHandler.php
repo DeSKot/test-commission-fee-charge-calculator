@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace CommissionFeeCalculator\Service\Transaction\Client\Rules\FreeCharge;
 
@@ -22,8 +23,8 @@ class CommissionHandler
     {
         $chain = new RangeDays();
 
-        $chain->setNext(new TotalAmountPerDays($this->currencyConvertor))
-            ->setNext(new CountOfOperation());
+        $chain->setNext(new CountOfOperation())
+            ->setNext(new TotalAmountPerDays($this->currencyConvertor));
 
         return $chain->handle($row, $context);
     }

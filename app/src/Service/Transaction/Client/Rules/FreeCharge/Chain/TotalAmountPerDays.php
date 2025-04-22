@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace CommissionFeeCalculator\Service\Transaction\Client\Rules\FreeCharge\Chain;
 
+use CommissionFeeCalculator\Enum\Calculation;
 use CommissionFeeCalculator\Service\FileReader\RowDto;
 use CommissionFeeCalculator\Service\FileReader\Transaction\TransactionRowDto;
 use CommissionFeeCalculator\Service\Transaction\Context\UserContextMap;
@@ -26,12 +28,28 @@ class TotalAmountPerDays extends Handler
         $operationContext = $userContext->getOperation()->getWithdraw();
 
         $amountInEuro = $this->currencyConvertor->convertToEuro($row->getAmount(), $row->getCurrency());
-        $operationContext->updateAmountPerWorkingDay($amountInEuro);
+        $operationContext->updateDateGroupAmount($row->getDate(), $amountInEuro);
 
-        if (bccomp($operationContext->getAmountPerWorkingDay(), $context->getConfig()->getFreeLimit()) <= -1) {
+        if (
+            bccomp(
+                $operationContext->getGroupOperationPerWeek($row->getDate())->getAmountPerWorkingDay(),
+                $context->getConfig()->getFreeLimit()
+            ) <= -1) {
             return parent::handle($row, $context);
-        }
+        } else {
+            $excessInEuro = bcsub(
+                $operationContext->getGroupOperationPerWeek($row->getDate())->getAmountPerWorkingDay(),
+                $context->getConfig()->getFreeLimit(), Calculation::DEFAULT_SCALE->value
+            );
+            $feeInEuro = $this->calculate($excessInEuro, $context->getConfig()->getPrivateWithdrawFeeRate());
+            $fee = $this->currencyConvertor->convertFromEuro($feeInEuro, $row->getCurrency());
 
-        return $context->getConfig()->getPrivateWithdrawFeeRate();
+            $operationContext
+                ->getGroupOperationPerWeek($row->getDate())
+                ->setAmountPerWorkingDay(
+                    $context->getConfig()->getFreeLimit()
+                );
+            return $fee;
+        }
     }
 }

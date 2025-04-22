@@ -1,18 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace CommissionFeeCalculator\Config;
 
-class Config
+readonly class Config
 {
 
-
     public function __construct(
-        private readonly string $depositFeeRate,
-        private readonly string $businessWithdrawFeeRate,
-        private readonly string $privateWithdrawFeeRate,
-        private readonly string $freeLimit,
-        private readonly int    $freeOperationsLimit,
-        private readonly array  $currencyDecimalPlaces,
+        private string $depositFeeRate,
+        private string $businessWithdrawFeeRate,
+        private string $privateWithdrawFeeRate,
+        private string $freeLimit,
+        private int    $freeOperationsLimit,
+        private array  $currencyDecimalPlaces,
     )
     {}
 

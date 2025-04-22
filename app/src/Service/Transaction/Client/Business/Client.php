@@ -14,18 +14,13 @@ class Client extends AbstractClient
 
     /**
      * @param TransactionRowDto $row
+     * @param UserContextMap $context
      * @return void
      */
     public function withdraw(RowDto $row, UserContextMap $context): void
     {
-        $commissionFee = bcmul(
-            $row->getAmount(),
-            $context->getConfig()->getBusinessWithdrawFeeRate(),
-            Calculation::DEFAULT_SCALE->value
-        );
-
         $commissionFee = $this->roundUp(
-            $commissionFee,
+            $this->calculate($row->getAmount(), $context->getConfig()->getBusinessWithdrawFeeRate()),
             $context->getConfig()->getCurrencyDecimalPlaces(
                 $row->getCurrency()
             )

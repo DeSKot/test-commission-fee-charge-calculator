@@ -14,13 +14,6 @@ readonly class App
         private Validation      $validation,
         private KernelException $kernelException,
         private FileReader      $fileReader,
-        //file handler (inside file handler we will provide calc chain inerface
-        // which can handle full creanatio
-        //jr nned to thing about structure of realisastion
-        //do'nt forget about operation interface
-        //client abstract class implements opertion interface
-        // we create provider which handle type of client and provide specific client implementation
-        // after we have to define operation method from interface by name from file
     )
     {
         $this->kernelException->setExceptionHandler();
@@ -31,9 +24,6 @@ readonly class App
         $parameters = new CliParameters($argc, $argv);
         $this->validation->validate($parameters);
 
-        //instead file reader create provider for him
-        //provider has to return file reader by type of file nad interface
-        //CommissionFeeCalculator\Service\FileReader\Reader
         $this->fileReader->display(
             $this->fileReader->read($parameters->getFilePath())
         );
