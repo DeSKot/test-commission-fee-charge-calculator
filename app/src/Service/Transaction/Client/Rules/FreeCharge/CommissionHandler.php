@@ -12,11 +12,9 @@ use CommissionFeeCalculator\Utils\CurrencyConvertor;
 
 class CommissionHandler
 {
-
     public function __construct(
         protected CurrencyConvertor $currencyConvertor,
-    )
-    {
+    ) {
     }
 
     public function handle(RowDto $row, UserContextMap $context): string

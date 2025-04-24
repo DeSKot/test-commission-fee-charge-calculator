@@ -12,17 +12,13 @@ class AppTest extends TestCase
 
     public function testCliOutputWithProvidedFiles(): void
     {
-        // Define the command to execute the CLI application
         $command = sprintf('php %s %s', __DIR__ . '/../main.php', self::INPUT_FILE);
 
-        // Execute the command and capture the output
         $output = [];
         exec($command, $output);
 
-        // Read the expected output from the file
         $expectedOutput = file(self::EXPECTED_OUTPUT_FILE, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-        // Assert that the CLI output matches the expected output
         $this->assertEquals($expectedOutput, $output);
     }
 }

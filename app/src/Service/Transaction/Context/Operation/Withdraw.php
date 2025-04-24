@@ -30,7 +30,7 @@ class Withdraw
     public function setGroupOperationPerWeek(DateTime $operationPerWeek): void
     {
         if (!key_exists(
-                $this->getPerWeekKey($operationPerWeek),
+            $this->getPerWeekKey($operationPerWeek),
             $this->operationPerWeek
         )) {
             $this->operationPerWeek[

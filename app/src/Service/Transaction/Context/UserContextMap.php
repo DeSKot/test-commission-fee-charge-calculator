@@ -12,8 +12,7 @@ class UserContextMap
 
     public function __construct(
         private readonly Config $config,
-    )
-    {
+    ) {
         $this->collection = new ArrayCollection();
     }
 

@@ -7,8 +7,7 @@ abstract class RowDto
 {
     public function __construct(
         protected array $rowData
-    )
-    {
+    ) {
         $this->setRowData();
     }
 

@@ -14,5 +14,4 @@ class Deposit
      */
     private int $counter = 0;
     private string $amount = "0.0";
-
 }

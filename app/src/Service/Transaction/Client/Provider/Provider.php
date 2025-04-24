@@ -17,8 +17,7 @@ class Provider implements Contract
     public function __construct(
         protected Config $config,
         protected PrivateWithdrawCommissionHandler $privateWithdrawCommissionHandler,
-    )
-    {
+    ) {
     }
 
     /**

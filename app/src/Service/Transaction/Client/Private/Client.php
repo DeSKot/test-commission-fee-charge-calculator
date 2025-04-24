@@ -17,8 +17,8 @@ class Client extends AbstractClient
 
     public function __construct(
         protected CommissionHandler $commissionHandler
-    )
-    {}
+    ) {
+    }
 
     /**
      * @param TransactionRowDto $row
@@ -41,5 +41,4 @@ class Client extends AbstractClient
 
         echo $commissionFee . PHP_EOL;
     }
-
 }

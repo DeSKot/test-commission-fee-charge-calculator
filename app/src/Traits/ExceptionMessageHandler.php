@@ -5,7 +5,6 @@ namespace CommissionFeeCalculator\Traits;
 
 trait ExceptionMessageHandler
 {
-
     protected function messageHandler($exception): void
     {
         echo $exception->getMessage() . PHP_EOL;

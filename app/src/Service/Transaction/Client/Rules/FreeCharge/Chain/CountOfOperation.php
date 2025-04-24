@@ -5,6 +5,7 @@ namespace CommissionFeeCalculator\Service\Transaction\Client\Rules\FreeCharge\Ch
 
 use CommissionFeeCalculator\Service\FileReader\RowDto;
 use CommissionFeeCalculator\Service\Transaction\Context\UserContextMap;
+
 class CountOfOperation extends Handler
 {
     public function handle(RowDto $row, UserContextMap $context): string
@@ -18,5 +19,4 @@ class CountOfOperation extends Handler
 
         return $context->getConfig()->getPrivateWithdrawFeeRate();
     }
-
 }

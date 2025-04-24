@@ -15,8 +15,7 @@ use CommissionFeeCalculator\ExchangeRate\File;
 use DI\Container;
 use DI\ContainerBuilder;
 
-return function (): Container|string
-{
+return function (): Container|string {
     $container = new ContainerBuilder();
 
     $container->addDefinitions([

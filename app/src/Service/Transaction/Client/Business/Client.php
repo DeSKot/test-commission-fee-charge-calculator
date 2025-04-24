@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace CommissionFeeCalculator\Service\Transaction\Client\Business;
 
-use CommissionFeeCalculator\Enum\Calculation;
 use CommissionFeeCalculator\Service\FileReader\RowDto;
 use CommissionFeeCalculator\Service\FileReader\Transaction\TransactionRowDto;
 use CommissionFeeCalculator\Service\Transaction\Client\Client as AbstractClient;

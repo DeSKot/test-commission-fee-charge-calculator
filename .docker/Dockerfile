@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y \
     libcurl4 \
     libcurl4-openssl-dev
 
+ENV PHP_CS_FIXER_IGNORE_ENV=1
+
 RUN docker-php-ext-install zip sodium bcmath curl
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer

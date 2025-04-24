@@ -13,8 +13,7 @@ class TotalAmountPerDays extends Handler
 {
     public function __construct(
         protected CurrencyConvertor $currencyConvertor
-    )
-    {
+    ) {
     }
 
     /**
@@ -39,7 +38,8 @@ class TotalAmountPerDays extends Handler
         } else {
             $excessInEuro = bcsub(
                 $operationContext->getGroupOperationPerWeek($row->getDate())->getAmountPerWorkingDay(),
-                $context->getConfig()->getFreeLimit(), Calculation::DEFAULT_SCALE->value
+                $context->getConfig()->getFreeLimit(),
+                Calculation::DEFAULT_SCALE->value
             );
             $feeInEuro = $this->calculate($excessInEuro, $context->getConfig()->getPrivateWithdrawFeeRate());
             $fee = $this->currencyConvertor->convertFromEuro($feeInEuro, $row->getCurrency());

@@ -18,11 +18,10 @@ class Reader extends Csv
     public function __construct(
         protected ClientProviderContract $clientProvider,
         protected UserContextMap $userContextMap,
-    )
-    {
+    ) {
     }
 
-    function setRowDto(array $rowData): RowDto
+    public function setRowDto(array $rowData): RowDto
     {
         return new TransactionRowDto($rowData);
     }

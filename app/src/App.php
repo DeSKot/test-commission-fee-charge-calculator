@@ -14,8 +14,7 @@ readonly class App
         private Validation      $validation,
         private KernelException $kernelException,
         private FileReader      $fileReader,
-    )
-    {
+    ) {
         $this->kernelException->setExceptionHandler();
     }
 

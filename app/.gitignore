@@ -6,3 +6,4 @@ phpunit.xml
 composer.lock
 bin/
 transactions.csv
+.php_cs.cache

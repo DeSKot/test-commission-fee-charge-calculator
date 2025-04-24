@@ -5,7 +5,6 @@ namespace CommissionFeeCalculator\Config;
 
 readonly class Config
 {
-
     public function __construct(
         private string $depositFeeRate,
         private string $businessWithdrawFeeRate,
@@ -13,8 +12,8 @@ readonly class Config
         private string $freeLimit,
         private int    $freeOperationsLimit,
         private array  $currencyDecimalPlaces,
-    )
-    {}
+    ) {
+    }
 
     public function getDepositFeeRate(): string
     {

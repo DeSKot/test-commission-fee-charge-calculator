@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace CommissionFeeCalculator\Service\Transaction\Client;
 
-use CommissionFeeCalculator\Enum\Calculation;
 use CommissionFeeCalculator\Service\FileReader\Transaction\TransactionRowDto;
 use CommissionFeeCalculator\Service\Transaction\Context\UserContextMap;
 use CommissionFeeCalculator\Service\Transaction\Operation\Contract;
@@ -12,7 +11,6 @@ use CommissionFeeCalculator\Traits\Calculation as CalculationTrait;
 
 abstract class Client implements Contract
 {
-
     use CalculationTrait;
     /**
      *
@@ -30,7 +28,7 @@ abstract class Client implements Contract
         echo $commissionFee . PHP_EOL;
     }
 
-    protected function roundUp(string $amount ,int $decimalPlaces): string
+    protected function roundUp(string $amount, int $decimalPlaces): string
     {
         $factor = bcpow('10', (string) $decimalPlaces, 0);
         return bcdiv(
